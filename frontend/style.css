@@ -22,6 +22,27 @@
     --focus-ring: rgba(37, 99, 235, 0.2);
     --welcome-bg: #1e3a5f;
     --welcome-border: #2563eb;
+    
+    /* Theme transition */
+    --transition: all 0.3s ease;
+}
+
+/* Light Theme Variables */
+:root[data-theme="light"] {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --background: #ffffff;
+    --surface: #f8fafc;
+    --surface-hover: #e2e8f0;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --user-message: #2563eb;
+    --assistant-message: #f1f5f9;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --focus-ring: rgba(37, 99, 235, 0.2);
+    --welcome-bg: #f0f9ff;
+    --welcome-border: #2563eb;
 }
 
 /* Base Styles */
@@ -34,6 +55,7 @@ body {
     overflow: hidden;
     margin: 0;
     padding: 0;
+    transition: var(--transition);
 }
 
 /* Container - Full Screen */
@@ -46,9 +68,15 @@ body {
     padding: 0;
 }
 
-/* Header - Hidden */
+/* Header */
 header {
-    display: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
 }
 
 header h1 {
@@ -67,6 +95,65 @@ header h1 {
     margin-top: 0.5rem;
 }
 
+/* Theme Toggle Button */
+.theme-toggle {
+    background: var(--surface-hover);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-toggle:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.05);
+}
+
+.theme-toggle:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-icon {
+    width: 20px;
+    height: 20px;
+    transition: var(--transition);
+}
+
+.theme-toggle .sun-icon {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+.theme-toggle .moon-icon {
+    opacity: 0;
+    transform: rotate(180deg);
+    position: absolute;
+}
+
+:root[data-theme="light"] .theme-toggle .sun-icon {
+    opacity: 0;
+    transform: rotate(180deg);
+}
+
+:root[data-theme="light"] .theme-toggle .moon-icon {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
 /* Main Content Area with Sidebar */
 .main-content {
     flex: 1;
@@ -83,6 +170,7 @@ header h1 {
     padding: 1.5rem;
     overflow-y: auto;
     flex-shrink: 0;
+    transition: var(--transition);
 }
 
 /* Custom Scrollbar for Sidebar */
@@ -131,6 +219,7 @@ header h1 {
     width: 100%;
     max-width: 800px;
     margin: 0;
+    transition: var(--transition);
 }
 
 /* Chat Messages */
@@ -168,6 +257,10 @@ header h1 {
     animation: fadeIn 0.3s ease-out;
 }
 
+.message-content {
+    transition: var(--transition);
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -192,6 +285,7 @@ header h1 {
     border-radius: 18px;
     word-wrap: break-word;
     line-height: 1.5;
+    transition: var(--transition);
 }
 
 .message.user .message-content {
@@ -362,6 +456,7 @@ header h1 {
     background: var(--background);
     border-top: 1px solid var(--border-color);
     flex-shrink: 0;
+    transition: var(--transition);
 }
 
 /* Chat Input */
@@ -373,7 +468,7 @@ header h1 {
     border-radius: 24px;
     color: var(--text-primary);
     font-size: 0.95rem;
-    transition: all 0.2s ease;
+    transition: all 0.2s ease, background var(--transition), border-color var(--transition), color var(--transition);
 }
 
 #chatInput:focus {
@@ -527,6 +622,7 @@ details[open] .suggested-header::before {
     padding: 0.75rem 0;
     background: transparent;
     border: none;
+    transition: var(--transition);
 }
 
 .stat-item {
@@ -536,6 +632,7 @@ details[open] .suggested-header::before {
     border-radius: 8px;
     border: 1px solid var(--border-color);
     margin-bottom: 0.75rem;
+    transition: var(--transition);
 }
 
 .stat-item:last-child {
@@ -670,7 +767,7 @@ details[open] .suggested-header::before {
     color: var(--text-primary);
     font-size: 0.875rem;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s ease, background var(--transition), border-color var(--transition), color var(--transition);
     text-align: left;
     width: 100%;
 }
