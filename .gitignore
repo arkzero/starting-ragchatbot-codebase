@@ -13,6 +13,7 @@ __pycache__/
 venv/
 env/
 ENV/
+temp_auto_push.bat
 
 # ChromaDB
 backend/chroma_db/
@@ -21,11 +22,11 @@ backend/chroma_db/
 uploads/
 
 # IDE
-.vscode/
 .idea/
 *.swp
 *.swo
 
 # OS
 .DS_Store
-Thumbs.db
+Thumbs.db.gitignore
+temp_interactive_push.bat
