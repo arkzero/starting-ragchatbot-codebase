@@ -18,9 +18,40 @@ cd backend && uv run uvicorn app:app --reload --port 8000
 # Install/sync dependencies
 uv sync
 
+# Install dev dependencies (includes code quality tools)
+uv sync --group dev
+
 # Add new dependency
 uv add package_name
+
+# Add dev dependency
+uv add package_name --group dev
 ```
+
+### Code Quality & Formatting
+```bash
+# Format code (isort + black)
+chmod +x scripts/format.sh && ./scripts/format.sh
+
+# Run quality checks (flake8 + mypy + format checks)
+chmod +x scripts/lint.sh && ./scripts/lint.sh
+
+# Full quality workflow (format + lint + tests)
+chmod +x scripts/quality.sh && ./scripts/quality.sh
+
+# Individual tool commands:
+uv run black backend/ main.py           # Format with black
+uv run isort backend/ main.py           # Sort imports with isort
+uv run flake8 backend/ main.py          # Lint with flake8
+uv run mypy backend/ main.py            # Type check with mypy
+```
+
+**Code Quality Standards:**
+- All code is automatically formatted with **black** (line length: 88)
+- Import sorting handled by **isort** (black-compatible profile)
+- Linting enforced with **flake8** (extends black compatibility)
+- Type checking with **mypy** (strict mode enabled)
+- Always run `./scripts/quality.sh` before committing code
 
 ### Environment Setup
 - Copy `.env.example` to `.env` and add your `ANTHROPIC_API_KEY`
